@@ -13,6 +13,9 @@
 </head>
 <body>
 <div id="root"></div>
+
+
+<div id="alice"></div>
 <script type="text/babel">
 
     function formatName(user) {
@@ -49,6 +52,18 @@
     }
 
     setInterval(tick, 1000);
+
+
+    function Welcome(props){
+        return <h1>Hello, {props.name}</h1>
+    }
+
+    const elementName = <Welcome name = "Alice" />;
+
+    ReactDOM.render(
+      elementName,
+      document.getElementById('alice'),
+    );
 
 </script>
 <!--
