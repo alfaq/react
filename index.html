@@ -13,9 +13,8 @@
 </head>
 <body>
 <div id="root"></div>
-
-
-<div id="alice"></div>
+<div id="button"></div>
+<div id="list"></div>
 <script type="text/babel">
 
     class Clock extends React.Component {
@@ -61,6 +60,56 @@
     }
 
     setInterval(tick, 1000);
+
+
+    class Toggle extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {isToggleOn: true};
+
+            // Эта привязка обязательна для работы `this` в колбэке.
+            this.handleClick = this.handleClick.bind(this);
+        }
+
+        handleClick() {
+            this.setState(state => ({
+                isToggleOn: !state.isToggleOn
+            }));
+        }
+
+        render() {
+            return (
+                    <button onClick={this.handleClick}>
+                        {this.state.isToggleOn ? 'Включено' : 'Выключено'}
+                    </button>
+            );
+        }
+    }
+
+    ReactDOM.render(
+            <Toggle />,
+        document.getElementById('button')
+    )
+
+
+
+    ///
+
+    function NumberList(props) {
+        const numbers = props.numbers;
+        const listItems = numbers.map((number) =>
+                <li>{number}</li>
+        );
+        return (
+                <ul>{listItems}</ul>
+        );
+    }
+
+    const numbers = [1, 2, 3, 4, 5];
+    ReactDOM.render(
+            <NumberList numbers={numbers} />,
+        document.getElementById('list')
+    );
 
 </script>
 <!--
